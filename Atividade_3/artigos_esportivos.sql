@@ -4,7 +4,7 @@ CREATE TABLE Categoria_Produtos
     id_categoria   INT AUTO_INCREMENT PRIMARY KEY,
     nome_categoria VARCHAR(50) NOT NULL
 );
-
+    
 -- Inserção de categorias iniciais
 INSERT INTO Categoria_Produtos (nome_categoria)
 VALUES ('Roupas Esportivas'),
