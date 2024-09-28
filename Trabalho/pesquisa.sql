@@ -247,66 +247,263 @@ VALUES ('BID - Banco Interamericano de Desenvolvimento', 100000.00),
        ('BANESPA - Banco do Estado de São Paulo', 85000.00),
        ('BDMG - Banco de Desenvolvimento de Minas Gerais', 120000.00);
 
+
 -- Inserção de projetos na tabela Projeto
 INSERT INTO Projeto (nome_projeto, valor_projeto, id_fonte, id_departamento)
 VALUES ('Acesso a Oportunidades', 15000.00,
         (SELECT id_fonte_fornecedora
          FROM FonteFinanciadora
-         WHERE nome_fonte = 'BID - Banco Interamericano de Desenvolvimento'),
-        (SELECT id_departamento FROM Departamento WHERE nome_departamento = 'DIDES' AND filial_departamento = 'NORTE')),
+         WHERE nome_fonte = 'BID - Banco Interamericano de Desenvolvimento'
+         LIMIT 1),
+        (SELECT id_departamento
+         FROM Departamento
+         WHERE nome_departamento = 'DIDES'
+           AND filial_departamento = 'NORTE'
+         LIMIT 1)),
 
        ('Brasil em Desenvolvimento', 19000.00,
         (SELECT id_fonte_fornecedora
          FROM FonteFinanciadora
-         WHERE nome_fonte = 'BNDES - Banco Nacional de Desenvolvimento Econômico e Social'),
-        (SELECT id_departamento FROM Departamento WHERE nome_departamento = 'DIRUR' AND filial_departamento = 'SUL')),
+         WHERE nome_fonte = 'BNDES - Banco Nacional de Desenvolvimento Econômico e Social'
+         LIMIT 1),
+        (SELECT id_departamento
+         FROM Departamento
+         WHERE nome_departamento = 'DIRUR'
+           AND filial_departamento = 'SUL'
+         LIMIT 1)),
 
        ('Emprego no Turismo', 35000.00,
         (SELECT id_fonte_fornecedora
          FROM FonteFinanciadora
-         WHERE nome_fonte = 'BID - Banco Interamericano de Desenvolvimento'),
-        (SELECT id_departamento FROM Departamento WHERE nome_departamento = 'DIMAC' AND filial_departamento = 'NORTE')),
+         WHERE nome_fonte = 'BID - Banco Interamericano de Desenvolvimento'
+         LIMIT 1),
+        (SELECT id_departamento
+         FROM Departamento
+         WHERE nome_departamento = 'DIMAC'
+           AND filial_departamento = 'NORTE'
+         LIMIT 1)),
 
        ('Mapa das Organizações da Sociedade Civil', 55000.00,
         (SELECT id_fonte_fornecedora
          FROM FonteFinanciadora
-         WHERE nome_fonte = 'BNDES - Banco Nacional de Desenvolvimento Econômico e Social'),
-        (SELECT id_departamento FROM Departamento WHERE nome_departamento = 'DIMAC' AND filial_departamento = 'SUL')),
+         WHERE nome_fonte = 'BNDES - Banco Nacional de Desenvolvimento Econômico e Social'
+         LIMIT 1),
+        (SELECT id_departamento
+         FROM Departamento
+         WHERE nome_departamento = 'DIMAC'
+           AND filial_departamento = 'SUL'
+         LIMIT 1)),
 
        ('Observatório de Gestão do Conhecimento', 20000.00,
         (SELECT id_fonte_fornecedora
          FROM FonteFinanciadora
-         WHERE nome_fonte = 'BNDES - Banco Nacional de Desenvolvimento Econômico e Social'),
-        (SELECT id_departamento FROM Departamento WHERE nome_departamento = 'DIDES' AND filial_departamento = 'SUL')),
+         WHERE nome_fonte = 'BNDES - Banco Nacional de Desenvolvimento Econômico e Social'
+         LIMIT 1),
+        (SELECT id_departamento
+         FROM Departamento
+         WHERE nome_departamento = 'DIDES'
+           AND filial_departamento = 'SUL'
+         LIMIT 1)),
 
        ('Atlas da Violência', 45000.00,
         (SELECT id_fonte_fornecedora
          FROM FonteFinanciadora
-         WHERE nome_fonte = 'BANERJ - Banco do Estado do Rio de Janeiro'),
+         WHERE nome_fonte = 'BANERJ - Banco do Estado do Rio de Janeiro'
+         LIMIT 1),
         (SELECT id_departamento
          FROM Departamento
-         WHERE nome_departamento = 'DINTE' AND filial_departamento = 'SUDESTE')),
+         WHERE nome_departamento = 'DINTE'
+           AND filial_departamento = 'SUDESTE'
+         LIMIT 1)),
 
        ('Centro de Pesquisa em Ciência, Tecnologia e Sociedade', 25000.00,
         (SELECT id_fonte_fornecedora
          FROM FonteFinanciadora
-         WHERE nome_fonte = 'BANESPA - Banco do Estado de São Paulo'),
+         WHERE nome_fonte = 'BANESPA - Banco do Estado de São Paulo'
+         LIMIT 1),
         (SELECT id_departamento
          FROM Departamento
-         WHERE nome_departamento = 'DISOC' AND filial_departamento = 'SUDESTE')),
+         WHERE nome_departamento = 'DISOC'
+           AND filial_departamento = 'SUDESTE'
+         LIMIT 1)),
 
        ('Retrato das Desigualdades de Gênero e Raça', 32000.00,
         (SELECT id_fonte_fornecedora
          FROM FonteFinanciadora
-         WHERE nome_fonte = 'BANESPA - Banco do Estado de São Paulo'),
+         WHERE nome_fonte = 'BANESPA - Banco do Estado de São Paulo'
+         LIMIT 1),
         (SELECT id_departamento
          FROM Departamento
-         WHERE nome_departamento = 'DISOC' AND filial_departamento = 'SUDESTE')),
+         WHERE nome_departamento = 'DISOC'
+           AND filial_departamento = 'SUDESTE'
+         LIMIT 1)),
 
        ('Índice de Vulnerabilidade Social', 60000.00,
         (SELECT id_fonte_fornecedora
          FROM FonteFinanciadora
-         WHERE nome_fonte = 'BDMG - Banco de Desenvolvimento de Minas Gerais'),
+         WHERE nome_fonte = 'BDMG - Banco de Desenvolvimento de Minas Gerais'
+         LIMIT 1),
         (SELECT id_departamento
          FROM Departamento
-         WHERE nome_departamento = 'DISOC' AND filial_departamento = 'SUDESTE'));
+         WHERE nome_departamento = 'DISOC'
+           AND filial_departamento = 'SUDESTE'
+         LIMIT 1));
+
+
+-- Inserir Pesquisadores
+INSERT INTO Pesquisador (nome_completo, status, id_cidade, id_estado, id_departamento, id_projeto)
+VALUES ('Miguel Silva', 'Ativo',
+        (SELECT id_cidade FROM Cidade WHERE nome_cidade = 'Boa Vista' LIMIT 1),
+        (SELECT id_estado FROM Estado WHERE nome_estado = 'Roraima' LIMIT 1),
+        (SELECT id_departamento FROM Departamento WHERE nome_departamento = 'DIDES' LIMIT 1),
+        (SELECT id_projeto FROM Projeto WHERE nome_projeto = 'Acesso a Oportunidades' LIMIT 1)),
+
+       ('Arthur Carvalho', 'Ativo',
+        (SELECT id_cidade FROM Cidade WHERE nome_cidade = 'Palmas' LIMIT 1),
+        (SELECT id_estado FROM Estado WHERE nome_estado = 'Tocantins' LIMIT 1),
+        (SELECT id_departamento FROM Departamento WHERE nome_departamento = 'DIMAC' LIMIT 1),
+        (SELECT id_projeto FROM Projeto WHERE nome_projeto = 'Emprego no Turismo' LIMIT 1)),
+
+       ('Helena Sousa', 'Inativo',
+        (SELECT id_cidade FROM Cidade WHERE nome_cidade = 'Porto Alegre' LIMIT 1),
+        (SELECT id_estado FROM Estado WHERE nome_estado = 'Rio Grande do Sul' LIMIT 1),
+        (SELECT id_departamento FROM Departamento WHERE nome_departamento = 'DIRUR' LIMIT 1),
+        (SELECT id_projeto FROM Projeto WHERE nome_projeto = 'Brasil em Desenvolvimento' LIMIT 1)),
+
+       ('Laura Pereira', 'Ativo',
+        (SELECT id_cidade FROM Cidade WHERE nome_cidade = 'Macapa' LIMIT 1),
+        (SELECT id_estado FROM Estado WHERE nome_estado = 'Amapá' LIMIT 1),
+        (SELECT id_departamento FROM Departamento WHERE nome_departamento = 'DIMAC' LIMIT 1),
+        (SELECT id_projeto FROM Projeto WHERE nome_projeto = 'Mapa das Organizações da Sociedade Civil' LIMIT 1)),
+
+       ('Gabriel Luz', 'Ativo',
+        (SELECT id_cidade FROM Cidade WHERE nome_cidade = 'Belem' LIMIT 1),
+        (SELECT id_estado FROM Estado WHERE nome_estado = 'Pará' LIMIT 1),
+        (SELECT id_departamento FROM Departamento WHERE nome_departamento = 'DIDES' LIMIT 1),
+        (SELECT id_projeto FROM Projeto WHERE nome_projeto = 'Observatório de Gestão do Conhecimento' LIMIT 1)),
+
+       ('Samuel Santos', 'Inativo',
+        (SELECT id_cidade FROM Cidade WHERE nome_cidade = 'Palmas' LIMIT 1),
+        (SELECT id_estado FROM Estado WHERE nome_estado = 'Tocantins' LIMIT 1),
+        (SELECT id_departamento FROM Departamento WHERE nome_departamento = 'DIDES' LIMIT 1),
+        (SELECT id_projeto FROM Projeto WHERE nome_projeto = 'Acesso a Oportunidades' LIMIT 1)),
+
+       ('Maria Oliveira', 'Ativo',
+        (SELECT id_cidade FROM Cidade WHERE nome_cidade = 'Boa Vista' LIMIT 1),
+        (SELECT id_estado FROM Estado WHERE nome_estado = 'Roraima' LIMIT 1),
+        (SELECT id_departamento FROM Departamento WHERE nome_departamento = 'DIDES' LIMIT 1),
+        (SELECT id_projeto FROM Projeto WHERE nome_projeto = 'Acesso a Oportunidades' LIMIT 1)),
+
+       ('Alice Rodrigues', 'Ativo',
+        (SELECT id_cidade FROM Cidade WHERE nome_cidade = 'Florianopolis' LIMIT 1),
+        (SELECT id_estado FROM Estado WHERE nome_estado = 'Santa Catarina' LIMIT 1),
+        (SELECT id_departamento FROM Departamento WHERE nome_departamento = 'DIRUR' LIMIT 1),
+        (SELECT id_projeto FROM Projeto WHERE nome_projeto = 'Brasil em Desenvolvimento' LIMIT 1)),
+
+       ('Bernardo Alves', 'Ativo',
+        (SELECT id_cidade FROM Cidade WHERE nome_cidade = 'Porto Velho' LIMIT 1),
+        (SELECT id_estado FROM Estado WHERE nome_estado = 'Rondônia' LIMIT 1),
+        (SELECT id_departamento FROM Departamento WHERE nome_departamento = 'DIMAC' LIMIT 1),
+        (SELECT id_projeto FROM Projeto WHERE nome_projeto = 'Mapa das Organizações da Sociedade Civil' LIMIT 1)),
+
+       ('Theo Gomes', 'Inativo',
+        (SELECT id_cidade FROM Cidade WHERE nome_cidade = 'Rio Branco' LIMIT 1),
+        (SELECT id_estado FROM Estado WHERE nome_estado = 'Acre' LIMIT 1),
+        (SELECT id_departamento FROM Departamento WHERE nome_departamento = 'DIDES' LIMIT 1),
+        (SELECT id_projeto FROM Projeto WHERE nome_projeto = 'Observatório de Gestão do Conhecimento' LIMIT 1)),
+
+       ('Ailton Santos', 'Ativo',
+        (SELECT id_cidade FROM Cidade WHERE nome_cidade = 'Cabo Frio' LIMIT 1),
+        (SELECT id_estado FROM Estado WHERE nome_estado = 'Rio de Janeiro' LIMIT 1),
+        (SELECT id_departamento FROM Departamento WHERE nome_departamento = 'DINTE' LIMIT 1),
+        (SELECT id_projeto FROM Projeto WHERE nome_projeto = 'Atlas da Violência' LIMIT 1)),
+
+       ('Ana Beatriz', 'Ativo',
+        (SELECT id_cidade FROM Cidade WHERE nome_cidade = 'Campinas' LIMIT 1),
+        (SELECT id_estado FROM Estado WHERE nome_estado = 'São Paulo' LIMIT 1),
+        (SELECT id_departamento FROM Departamento WHERE nome_departamento = 'DISOC' LIMIT 1),
+        (SELECT id_projeto FROM Projeto WHERE nome_projeto = 'Retrato das Desigualdades de Gênero e Raça' LIMIT 1)),
+
+       ('Bruno Gomes', 'Inativo',
+        (SELECT id_cidade FROM Cidade WHERE nome_cidade = 'Guarulhos' LIMIT 1),
+        (SELECT id_estado FROM Estado WHERE nome_estado = 'São Paulo' LIMIT 1),
+        (SELECT id_departamento FROM Departamento WHERE nome_departamento = 'DISOC' LIMIT 1),
+        (SELECT id_projeto FROM Projeto WHERE nome_projeto = 'Retrato das Desigualdades de Gênero e Raça' LIMIT 1)),
+
+       ('Leticia Rodrigues', 'Ativo',
+        (SELECT id_cidade FROM Cidade WHERE nome_cidade = 'Belo Horizonte' LIMIT 1),
+        (SELECT id_estado FROM Estado WHERE nome_estado = 'Minas Gerais' LIMIT 1),
+        (SELECT id_departamento FROM Departamento WHERE nome_departamento = 'DISOC' LIMIT 1),
+        (SELECT id_projeto FROM Projeto WHERE nome_projeto = 'Índice de Vulnerabilidade Social' LIMIT 1)),
+
+       ('Vinicius Silva', 'Ativo',
+        (SELECT id_cidade FROM Cidade WHERE nome_cidade = 'São Paulo' LIMIT 1),
+        (SELECT id_estado FROM Estado WHERE nome_estado = 'São Paulo' LIMIT 1),
+        (SELECT id_departamento FROM Departamento WHERE nome_departamento = 'DINTE' LIMIT 1),
+        (SELECT id_projeto FROM Projeto WHERE nome_projeto = 'Atlas da Violência' LIMIT 1));
+
+
+-- 1 Liste os projetos e suas fontes financiadoras:
+SELECT P.nome_projeto, F.nome_fonte
+FROM Projeto P
+         JOIN FonteFinanciadora F ON P.id_fonte = F.id_fonte_fornecedora;
+
+-- 2 Liste os projetos gerenciados pelos departamentos:
+SELECT P.nome_projeto, D.nome_departamento
+FROM Projeto P
+         JOIN Departamento D ON P.id_departamento = D.id_departamento;
+
+-- 3 Liste os pesquisadores presentes na filial "NORTE":
+SELECT Pes.nome_completo, D.filial_departamento
+FROM Pesquisador Pes
+         JOIN Departamento D ON Pes.id_departamento = D.id_departamento
+WHERE D.filial_departamento = 'NORTE';
+
+-- 4 Liste os pesquisadores presentes na filial "SUL":
+SELECT Pes.nome_completo, D.filial_departamento
+FROM Pesquisador Pes
+         JOIN Departamento D ON Pes.id_departamento = D.id_departamento
+WHERE D.filial_departamento = 'SUL';
+
+-- 5 Liste o nome e a cidade dos pesquisadores presentes no projeto "Acesso a Oportunidades"
+SELECT Pes.nome_completo, E.nome_cidade, P.nome_projeto
+FROM Pesquisador Pes
+         JOIN Projeto P ON Pes.id_departamento = P.id_departamento
+         JOIN Cidade E ON Pes.id_cidade = E.id_cidade
+WHERE P.Nome_Projeto = 'Acesso a Oportunidades';
+
+-- 6 Liste o nome do pesquisador, valor da bolsa, nome do projeto e departamento dos pesquisadores que moram em “Roraima”
+SELECT Pes.nome_completo, Pr.valor_projeto, Pr.nome_projeto, D.nome_departamento
+FROM Pesquisador Pes
+         JOIN Projeto Pr ON Pes.id_departamento = Pr.id_departamento
+         JOIN Departamento D ON Pes.id_departamento = D.id_departamento
+         JOIN Estado E ON Pes.id_estado = E.id_estado
+WHERE E.nome_estado = 'Roraima';
+
+-- 7 Liste todos os pesquisadores (pesquisador, valor da bolsa, nome do projeto, nome do departamento) e sua localização (cidade e estado)
+SELECT Pes.nome_completo, Pr.valor_projeto, Pr.nome_projeto, D.nome_departamento, C.nome_cidade, E.nome_estado
+FROM Pesquisador Pes
+         JOIN Projeto Pr ON Pes.id_departamento = Pr.id_departamento
+         JOIN Departamento D ON Pes.id_departamento = D.id_departamento
+         JOIN Cidade C on C.id_cidade = Pes.id_cidade
+         JOIN Estado E ON Pes.id_estado = E.id_estado;
+
+-- 8 Liste o estado que mais possui pesquisadores
+SELECT E.nome_estado, COUNT(*) AS Quantidade_Pesquisadores
+FROM Pesquisador Pes
+         JOIN Estado E ON Pes.id_estado = E.id_estado
+GROUP BY E.id_estado
+ORDER BY Quantidade_Pesquisadores DESC
+LIMIT 1;
+
+-- 9 Liste todos os projetos (nome do projeto, departamento, filial departamento, fonte financiadora, valor a investir da fonte financiadora e valor do projeto)
+SELECT Pr.nome_projeto,
+       D.nome_departamento,
+       D.filial_departamento,
+       F.nome_fonte,
+       F.valor_investido,
+       Pr.valor_projeto
+FROM Projeto Pr
+         JOIN Departamento D ON Pr.id_departamento = D.id_departamento
+         JOIN FonteFinanciadora F ON Pr.id_fonte = F.id_fonte_fornecedora
+ORDER BY F.valor_investido DESC;
