@@ -40,6 +40,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `Games`.`Jogo_Plataforma` (
   `Jogos_idJogos` INT NOT NULL,
   `Plataforma_idPlataforma` INT NOT NULL,
+  `Preco` DOUBLE NOT NULL,
   PRIMARY KEY (`Jogos_idJogos`, `Plataforma_idPlataforma`),
   INDEX `fk_Jogos_has_Plataforma_Plataforma1_idx` (`Plataforma_idPlataforma` ASC) VISIBLE,
   INDEX `fk_Jogos_has_Plataforma_Jogos_idx` (`Jogos_idJogos` ASC) VISIBLE,
